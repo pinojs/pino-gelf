@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 'use strict'
 
-var gelf = require('./lib/gelf')
-var parse = require('fast-json-parse')
-var pump = require('pump')
-var split = require('split2')
+var path = require('path')
+var fs = require('fs')
+var realPath = fs.realpathSync(__dirname)
+var script = path.join(realPath, 'lib', 'pino-gelf.js')
 
-pump(process.stdin, split(parse), gelf.transform)
-process.on('SIGINT', function () { process.exit(0) })
+require(script.toString())

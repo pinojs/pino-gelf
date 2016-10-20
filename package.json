@@ -18,6 +18,27 @@
     "url": "https://github.com/darArch/pino-gelf/issues"
   },
   "homepage": "https://github.com/darArch/pino-gelf#readme",
+  "nyc": {
+    "include": [
+      "index.js",
+      "lib/*.js"
+    ],
+    "exclude": [
+      "lib/pino-gelf.js"
+    ],
+    "extension": [
+      ".js"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "check-coverage": true,
+    "lines": 85,
+    "branches": 85,
+    "functions": 85,
+    "statements": 85
+  },
   "dependencies": {
     "fast-json-parse": "^1.0.2",
     "fast-json-stringify": "^0.10.0",
