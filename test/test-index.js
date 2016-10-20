@@ -4,6 +4,7 @@ var chai = require('chai')
 var path = require('path')
 var should = chai.should()
 var spawn = require('child_process').spawn
+var zlib = require('zlib')
 
 var messages = require('./messages')
 var utils = require('../lib/utils')
@@ -24,7 +25,8 @@ describe('pino-gelf', function () {
 
     var psut = spawn('node', [pinoGelfPath])
     psut.stdout.on('data', function (data) {
-      var msg = data.toString()
+      var unzipped = zlib.unzipSync(data)
+      var msg = unzipped.toString()
       msg.should.be.equal(expected)
       psut.kill()
       done()
@@ -46,7 +48,8 @@ describe('pino-gelf', function () {
 
     var psut = spawn('node', [pinoGelfPath])
     psut.stdout.on('data', function (data) {
-      var msg = data.toString()
+      var unzipped = zlib.unzipSync(data)
+      var msg = unzipped.toString()
       msg.should.be.equal(expected)
       psut.kill()
       done()
