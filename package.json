@@ -4,7 +4,9 @@
   "description": "Convert Pino logs to GELF format and upload to Graylog",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "eslint . --ext .js",
+    "test": "nyc mocha -R spec --recursive",
+    "posttest": "nyc report"
   },
   "repository": {
     "type": "git",
@@ -19,8 +21,15 @@
   "dependencies": {
     "fast-json-parse": "^1.0.2",
     "fast-json-stringify": "^0.10.0",
+    "pump": "^1.0.1",
     "readable-stream": "^2.1.5",
     "split2": "^2.1.0",
     "through2": "^2.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.8.1",
+    "mocha": "^3.1.2",
+    "nyc": "^8.3.2"
   }
 }
