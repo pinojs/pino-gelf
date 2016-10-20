@@ -1,7 +1,7 @@
 {
   "name": "pino-gelf",
   "version": "1.0.0",
-  "description": "Convert Pino logs to GELF format and upload to Graylog",
+  "description": "Convert Pino logs to GELF format and gzip ready for upload to Graylog",
   "main": "index.js",
   "scripts": {
     "pretest": "eslint . --ext .js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/darArch/pino-gelf.git"
+    "url": "git+https://github.com/findmypast/pino-gelf.git"
   },
   "author": "Donald Robertson <donaldarobertson89@gmail.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/darArch/pino-gelf/issues"
+    "url": "https://github.com/findmypast/pino-gelf/issues"
   },
-  "homepage": "https://github.com/darArch/pino-gelf#readme",
+  "homepage": "https://github.com/findmypast/pino-gelf#readme",
   "nyc": {
     "include": [
       "index.js",
