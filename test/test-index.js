@@ -17,9 +17,7 @@ describe('pino-gelf', function () {
 
     var psut = spawn('node', [pinoGelfPath])
     psut.stdout.on('data', function (data) {
-      var unzipped = zlib.unzipSync(data)
-      var msg = unzipped.toString()
-      msg.should.be.equal(expected)
+      data.should.be.equal(expected)
       psut.kill()
       done()
     })
@@ -35,14 +33,12 @@ describe('pino-gelf', function () {
       full_message: 'hello world',
       timestamp: 1459529098958,
       level: 6,
-      _facility: 'blah'
+      facility: 'blah'
     })
 
     var psut = spawn('node', [pinoGelfPath])
     psut.stdout.on('data', function (data) {
-      var unzipped = zlib.unzipSync(data)
-      var msg = unzipped.toString()
-      msg.should.be.equal(expected)
+      data.toString('utf8').should.be.equal(expected)
       psut.kill()
       done()
     })
@@ -58,14 +54,12 @@ describe('pino-gelf', function () {
       full_message: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at',
       timestamp: 1459529098958,
       level: 6,
-      _facility: 'blah'
+      facility: 'blah'
     })
 
     var psut = spawn('node', [pinoGelfPath])
     psut.stdout.on('data', function (data) {
-      var unzipped = zlib.unzipSync(data)
-      var msg = unzipped.toString()
-      msg.should.be.equal(expected)
+      data.toString('utf8').should.be.equal(expected)
       psut.kill()
       done()
     })
