@@ -12,6 +12,21 @@ var utils = require('../lib/utils')
 var pinoGelfPath = path.join(path.resolve(__dirname, '..', 'index'))
 
 describe('pino-gelf', function () {
+  it('should not write anything to the standard out when passed no data', function () {
+    var expected = ''
+
+    var psut = spawn('node', [pinoGelfPath])
+    psut.stdout.on('data', function (data) {
+      var unzipped = zlib.unzipSync(data)
+      var msg = unzipped.toString()
+      msg.should.be.equal(expected)
+      psut.kill()
+      done()
+    })
+
+    psut.stdin.write('\n')
+  })
+
   it('should write a well formed GELF object to the standard out when passed a valid Pino Message with message length less than or equal to 64 characters', function (done) {
     var expected = utils.stringify({
       version: '1.1',
