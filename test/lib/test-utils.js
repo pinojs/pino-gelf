@@ -3,12 +3,12 @@
 var chai = require('chai')
 var should = chai.should()
 
-var syslogLevel = require('../../lib/utils/syslog-levels')
-
 var sut = require('../../lib/utils')
 
 describe('lib/utils', function () {
   describe('pinoLevelToSyslogLevel', function () {
+    var syslogLevel = sut.syslogLevel
+
     it('should return SysLog Level Debug for Pino Level Trace', function () {
       var pinoLevelTrace = 10
       return sut.pinoLevelToSyslogLevel(pinoLevelTrace).should.be.equal(syslogLevel.debug)
