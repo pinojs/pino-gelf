@@ -34,10 +34,10 @@
       "text-summary"
     ],
     "check-coverage": true,
-    "lines": 85,
-    "branches": 85,
-    "functions": 85,
-    "statements": 85
+    "lines": 99,
+    "branches": 99,
+    "functions": 99,
+    "statements": 99
   },
   "dependencies": {
     "fast-json-parse": "^1.0.2",
