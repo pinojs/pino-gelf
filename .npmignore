@@ -1,0 +1,8 @@
+.nyc_output/
+coverage/
+test/
+
+.eslintignore
+.eslintrc.yml
+.gitignore
+.npmignore
