@@ -53,13 +53,13 @@ Maximum Chunk Size|1420
 Given the Pino log message:
 
 ```
-{"pid":94473,"hostname":"findmypast.co.uk","name":"app","level":30,"msg":"hello world","time":1459529098958,"v":1}
+{"pid":94473,"hostname":"domain.co.uk","name":"app","level":30,"msg":"hello world","time":1459529098958,"v":1}
 ```
 
 Pino GELF will send a message containing to your Graylog server:
 
 ```
-{"version":"1.1","host":"findmypast.co.uk","short_message":"hello world","full_message":"hello world","timestamp":1459529098958,"level":6,"facility":"app"}
+{"version":"1.1","host":"domain.co.uk","short_message":"hello world","full_message":"hello world","timestamp":1459529098958,"level":6,"facility":"app"}
 ```
 
 ## GELF
