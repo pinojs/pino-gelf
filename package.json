@@ -44,6 +44,7 @@
   "dependencies": {
     "fast-json-parse": "^1.0.2",
     "fast-json-stringify": "^0.10.0",
+    "lodash": "^4.17.2",
     "nopt": "^3.0.6",
     "pump": "^1.0.1",
     "readable-stream": "^2.1.5",
