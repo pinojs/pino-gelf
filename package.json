@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Convert Pino logs to GELF format and gzip ready for upload to Graylog",
   "main": "index.js",
-  "bin": "index.js",
+  "bin": {
+    "pino-gelf": "index.js"
+  },
   "preferGlobal": true,
   "scripts": {
-    "pretest": "eslint . --ext .js",
-    "test": "nyc mocha -R spec --recursive",
-    "posttest": "nyc report"
+    "lint": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",
@@ -20,27 +20,6 @@
     "url": "https://github.com/findmypast/pino-gelf/issues"
   },
   "homepage": "https://github.com/findmypast/pino-gelf#readme",
-  "nyc": {
-    "include": [
-      "index.js",
-      "lib/*.js"
-    ],
-    "exclude": [
-      "lib/pino-gelf.js"
-    ],
-    "extension": [
-      ".js"
-    ],
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "check-coverage": true,
-    "lines": 99,
-    "branches": 99,
-    "functions": 99,
-    "statements": 99
-  },
   "dependencies": {
     "commander": "^2.9.0",
     "fast-json-parse": "^1.0.2",
@@ -52,9 +31,6 @@
     "through2": "^2.0.1"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^3.8.1",
-    "mocha": "^3.1.2",
-    "nyc": "^8.3.2"
+    "eslint": "^3.12.2"
   }
 }
