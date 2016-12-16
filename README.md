@@ -27,7 +27,7 @@ The recommended pipeline to run Pino GELF as a transform for Pino logs is as fol
 node your-app.js | pino-gelf log
 ```
 
-The host, port and maximum chunk size of your Graylog server can be specified using options. Options can also be used to include standard fields logged by [express-pino-middleware](https://github.com/pinojs/express-pino-logger). Custom fields included with Pino requests based on your own configuration can also be specified. Finally, you can choose to enable verbose mode which outputs all GELF messages locally, this can be useful for initial configuration.
+The host, port and maximum chunk size of your Graylog server can be specified using options. Options can also be used to include standard fields logged by [express-pino-middleware](https://github.com/pinojs/express-pino-logger). Custom fields included with Pino requests based on your own configuration can also be specified, although at present only strings are handled. Finally, you can choose to enable verbose mode which outputs all GELF messages locally, this can be useful for initial configuration.
 
 ```
 // Set Graylog host
@@ -139,7 +139,7 @@ Pino GELF will send the following message to your Graylog server (formatted here
 
 ## GELF
 
-At present the mapping from Pino log messages to GELF messages is as follows:
+At present the mapping from standard Pino log messages to GELF messages is as follows:
 
 GELF Property|Pino Log Property|Notes
 ---|---|---
