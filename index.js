@@ -4,7 +4,7 @@
 
 const program = require('commander');
 const version = require('./package.json').version;
-const pinoGelf = require('./lib/pinoGelf');
+const pinoGelf = require('./lib/pino-gelf');
 
 function parseCustomFields (val) {
   if (val === undefined) return [];
