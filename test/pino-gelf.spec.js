@@ -120,7 +120,7 @@ describe('pinoGelf', function() {
         
         pg.stdout.on('data', data => {
             pg.kill();
-            expect(data.toString()).toEqual(pinoCustomOutput);
+            expect(data.toString()).toEqual(pinoCustomOutput + '\n');
             done();
         });
         
