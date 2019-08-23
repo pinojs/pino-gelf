@@ -1,6 +1,6 @@
 {
   "name": "pino-gelf",
-  "version": "1.1.4",
+  "version": "2.0.0",
   "description": "Convert Pino logs to GELF format and gzip ready for upload to Graylog",
   "main": "index.js",
   "bin": {
@@ -24,17 +24,17 @@
   },
   "homepage": "https://github.com/pinojs/pino-gelf#readme",
   "dependencies": {
-    "commander": "^2.19.0",
+    "commander": "^2.20.0",
     "fast-json-parse": "^1.0.3",
-    "fast-json-stringify": "^1.9.1",
+    "fast-json-stringify": "^1.15.2",
     "lodash": "^4.17.11",
     "pump": "^3.0.0",
-    "readable-stream": "^3.0.6",
-    "split2": "^3.0.0",
-    "through2": "^2.0.3"
+    "readable-stream": "^3.3.0",
+    "split2": "^3.1.1",
+    "through2": "^2.0.5"
   },
   "devDependencies": {
-    "eslint": "^5.7.0",
-    "jest": "^23.6.0"
+    "eslint": "^5.16.0",
+    "jest": "^24.8.0"
   }
 }

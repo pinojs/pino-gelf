@@ -6,12 +6,6 @@ const program = require('commander');
 const version = require('./package.json').version;
 const pinoGelf = require('./lib/pino-gelf');
 
-function parseCustomFields (val) {
-  if (val === undefined) return [];
-  if (val.includes(',')) return val.split(',');
-  return [ val ];
-}
-
 program
   .version(version);
 
@@ -21,17 +15,16 @@ program
   .option('-h, --host [host]', 'Graylog Host')
   .option('-p, --port [port]', 'Graylog Port', parseInt)
   .option('-m, --max-chunk-size [maxChunkSize]', 'Graylog Input Maximum Chunk Size', parseInt)
-  .option('-e, --use-express-middleware-preset')
-  .option('-c, --specify-custom-fields [keyList]', 'Comma Separated List of Custom Keys', parseCustomFields)
   .option('-v, --verbose', 'Output GELF to console')
+  .option('-t, --passthrough', 'Output original input to stdout to allow command chaining')
   .action(function () {
     const opts = {
       customKeys: this.specifyCustomFields || [],
       host: this.host || '127.0.0.1',
       maxChunkSize: this.maxChunkSize || 1420,
       port: this.port || 12201,
-      useExpressMiddlewarePreset: this.useExpressMiddlewarePreset || false,
-      verbose: this.verbose || false
+      verbose: (this.verbose && !this.passthrough) || false,
+      passthrough: this.passthrough || false
     };
 
     pinoGelf(opts);
