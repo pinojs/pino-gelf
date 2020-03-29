@@ -11,7 +11,7 @@ function pinoOutput(msg, level) {
 
 async function testPinoToSyslogLevel(pinoLevel, syslogLevel, testCallback) {    
     const pg = cp.spawn('node', [pgPath, 'log', '-v']);
-    const expected = `{"_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074.631,"level":${syslogLevel}}`;
+    const expected = `{"_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074.631,"level":${syslogLevel}}\n`;
 
     pg.stdout.on('data', data => {
         pg.kill();
@@ -41,7 +41,7 @@ describe('pinoGelf', function() {
 
     test('pino output is transformed to gelf output', done => {
         const pg = cp.spawn('node', [pgPath, 'log', '-v']);
-        const expected = '{"_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074.631,"level":6}';
+        const expected = '{"_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074.631,"level":6}\n';
         
         pg.stdout.on('data', data => {
             expect(data.toString()).toEqual(expected);
@@ -55,7 +55,7 @@ describe('pinoGelf', function() {
     test('short message is trimmed down', done => {
         const pg = cp.spawn('node', [pgPath, 'log', '-v']);
         const msg = 'hello world world world world world world world world world world world world';
-        const expected = `{"_name":"app","version":"1.1","host":"box","short_message":"hello world world world world world world world world world world","full_message":"${msg}","timestamp":1531171074.631,"level":6}`;
+        const expected = `{"_name":"app","version":"1.1","host":"box","short_message":"hello world world world world world world world world world world","full_message":"${msg}","timestamp":1531171074.631,"level":6}\n`;
         
         pg.stdout.on('data', data => {
             expect(data.toString()).toEqual(expected);
@@ -89,7 +89,7 @@ describe('pinoGelf', function() {
     test('pino output with express-pino-middleware content is transformed to gelf output', done => {
         const pg = cp.spawn('node', [pgPath, 'log', '-v']);
         const pinoExpressOutput = '{"level":30,"time":1531171074631,"msg":"hello world","res":{"statusCode":304,"header":"HTTP/1.1 304 Not Modified"},"responseTime":8,"req":{"method":"GET","url":"/","headers":{"accept":"text/html"}},"pid":657,"hostname":"box","name":"app","v":1}'
-        const expected = '{"_res":"{\\"statusCode\\":304,\\"header\\":\\"HTTP/1.1 304 Not Modified\\"}","_responseTime":"8","_req":"{\\"method\\":\\"GET\\",\\"url\\":\\"/\\",\\"headers\\":{\\"accept\\":\\"text/html\\"}}","_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074.631,"level":6}';
+        const expected = '{"_res":"{\\"statusCode\\":304,\\"header\\":\\"HTTP/1.1 304 Not Modified\\"}","_responseTime":"8","_req":"{\\"method\\":\\"GET\\",\\"url\\":\\"/\\",\\"headers\\":{\\"accept\\":\\"text/html\\"}}","_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074.631,"level":6}\n';
         
         pg.stdout.on('data', data => {
             pg.kill();
@@ -103,7 +103,7 @@ describe('pinoGelf', function() {
     test('pino output with custom fields is transformed to gelf output', done => {
         const pg = cp.spawn('node', [pgPath, 'log', '-v']);
         const pinoCustomOutput = '{"level":30,"time":1531171074631,"msg":"hello world","environment":"dev","colour":"red","pid":657,"hostname":"box","name":"app","v":1}';
-        const expected = '{"_environment":"dev","_colour":"red","_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074.631,"level":6}';
+        const expected = '{"_environment":"dev","_colour":"red","_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074.631,"level":6}\n';
         
         pg.stdout.on('data', data => {
             pg.kill();
