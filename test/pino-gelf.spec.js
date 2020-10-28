@@ -1,8 +1,6 @@
 const cp = require('child_process');
 const path = require('path');
 
-jest.mock('dgram');
-
 const pgPath = path.join(__dirname, '..', 'index.js');
 
 function pinoOutput(msg, level) {
@@ -23,6 +21,87 @@ function testPinoToSyslogLevel(pinoLevel, syslogLevel, testCallback) {
 }
 
 describe('pinoGelf', function() {
+  test('UDP protocol is used with appropriate param', done => {
+    const pg = cp.spawn('node', [pgPath, 'log', '-v', '-P', 'udp']);
+    
+    pg.on('close', (code) => {
+      expect(code).toEqual(0);
+      done();
+    });
+    
+    pg.stdin.end(pinoOutput('hello world', 30) + '\n');
+  });
+
+  test('HTTP protocol is used with appropriate param', done => {
+    const pg = cp.spawn('node', [pgPath, 'log', '-v', '-P', 'http']);
+    
+    pg.on('close', (code) => {
+      expect(code).toEqual(0);
+      done();
+    });
+    
+    pg.stdin.end(pinoOutput('hello world', 30) + '\n');
+  });
+
+  test('HTTPS protocol is used with appropriate param', done => {
+    const pg = cp.spawn('node', [pgPath, 'log', '-v', '-P', 'https']);
+    
+    pg.on('close', (code) => {
+      expect(code).toEqual(0);
+      done();
+    });
+    
+    pg.stdin.end(pinoOutput('hello world', 30) + '\n');
+  });
+
+  test('TCP protocol is used with appropriate param', done => {
+    const pg = cp.spawn('node', [pgPath, 'log', '-v', '-P', 'tcp']);
+    
+    pg.on('close', (code) => {
+      expect(code).toEqual(0);
+      done();
+    });
+
+    // As the TCP socket hangs and we cannot mock it in the child process
+    // let's assume that if no error has been raised in 3 seconds
+    // everything went fine
+    setTimeout(() => {
+      pg.kill('SIGINT');
+    }, 3000);
+    
+    pg.stdin.end(pinoOutput('hello world', 30) + '\n');
+  });
+
+  test('TLS protocol is used with appropriate param', done => {
+    const pg = cp.spawn('node', [pgPath, 'log', '-v', '-P', 'tls']);
+    
+    pg.on('close', (code) => {
+      expect(code).toEqual(0);
+      done();
+    });
+
+    // As the TCP socket hangs and we cannot mock it in the child process
+    // let's assume that if no error has been raised in 3 seconds
+    // everything went fine
+    setTimeout(() => {
+      pg.kill('SIGINT');
+    }, 3000);
+    
+    pg.stdin.end(pinoOutput('hello world', 30) + '\n');
+  });
+
+  test('an error is returned when an unknown protocol is specified', done => {
+    const pg = cp.spawn('node', [pgPath, 'log', '-v', '-P', 'foo']);
+    
+    pg.on('close', (code) => {
+      expect(code).toEqual(1);
+      done();
+    });
+    
+    pg.stdin.end(pinoOutput('hello world', 30) + '\n');
+  });
+
+
   test('no logs are processed when non-json message is passed to stdin', done => {
     const pg = cp.spawn('node', [pgPath, 'log', '-v']);
         

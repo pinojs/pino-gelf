@@ -14,7 +14,11 @@ program
   .description('Run Pino-GELF')
   .option('-h, --host [host]', 'Graylog Host')
   .option('-p, --port [port]', 'Graylog Port', parseInt)
-  .option('-m, --max-chunk-size [maxChunkSize]', 'Graylog Input Maximum Chunk Size', parseInt)
+  .option('-P, --protocol [protocol]', 'Graylog protocol (UDP, HTTP, HTTPS, TCP, TLS)')
+  .option('-m, --max-chunk-size [maxChunkSize]', 'Graylog UDP Input Maximum Chunk Size', parseInt)
+  .option('-k, --keep-alive', 'HTTP/TCP keep alive')
+  .option('-r, --reconnection-limit [reconnectionLimit]', 'TCP reconnection limit', parseInt)
+  .option('-d, --reconnection-delay [reconnectionDelay]', 'TCP reconnection delay', parseInt)
   .option('-v, --verbose', 'Output GELF to console')
   .option('-t, --passthrough', 'Output original input to stdout to allow command chaining')
   .action(function () {
@@ -23,11 +27,26 @@ program
     const opts = {
       customKeys: options.specifyCustomFields || [],
       host: options.host || '127.0.0.1',
+      protocol: this.protocol || 'udp',
       maxChunkSize: options.maxChunkSize || 1420,
+      keepAlive: this.keepAlive != null ? this.keepAlive : true,
+      reconnectionLimit: this.reconnectionLimit || -1,
+      reconnectionDelay: this.reconnectionDelay || 1000,
       port: options.port || 12201,
       verbose: (options.verbose && !options.passthrough) || false,
       passthrough: options.passthrough || false
     };
+
+    switch(opts.protocol) {
+    case 'udp':
+    case 'http':
+    case 'https':
+    case 'tcp':
+    case 'tls':
+      break;
+    default:
+      throw new Error('Unsupported protocol ' + opts.protocol);
+    } 
 
     pinoGelf(opts);
   });
