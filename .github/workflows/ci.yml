@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         node-version: [10, 12, 14, 16]
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest]
 
     steps:
 
@@ -32,24 +32,7 @@ jobs:
 
       - name: Run tests
         run: |
-          npm run test
-
-      - name: Coveralls Parallel
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ secrets.github_token }}
-          parallel: true
-          flag-name: run-${{ matrix.node-version }}-${{ matrix.os }}
-
-  coverage:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          parallel-finished: true
+          npm test
 
   automerge:
     needs: test
