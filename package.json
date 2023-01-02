@@ -27,14 +27,14 @@
     "commander": "^9.4.1",
     "fast-json-parse": "^1.0.3",
     "fast-json-stringify": "^1.15.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "pump": "^3.0.0",
-    "readable-stream": "^4.0.0",
-    "split2": "^4.0.0",
+    "readable-stream": "^4.3.0",
+    "split2": "^4.1.0",
     "through2": "^4.0.2"
   },
   "devDependencies": {
-    "eslint": "^8.22.0",
+    "eslint": "^8.31.0",
     "jest": "^29.3.1"
   }
 }
