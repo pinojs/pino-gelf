@@ -18,13 +18,15 @@ program
   .option('-v, --verbose', 'Output GELF to console')
   .option('-t, --passthrough', 'Output original input to stdout to allow command chaining')
   .action(function () {
+    const options = this.opts();
+
     const opts = {
-      customKeys: this.specifyCustomFields || [],
-      host: this.host || '127.0.0.1',
-      maxChunkSize: this.maxChunkSize || 1420,
-      port: this.port || 12201,
-      verbose: (this.verbose && !this.passthrough) || false,
-      passthrough: this.passthrough || false
+      customKeys: options.specifyCustomFields || [],
+      host: options.host || '127.0.0.1',
+      maxChunkSize: options.maxChunkSize || 1420,
+      port: options.port || 12201,
+      verbose: (options.verbose && !options.passthrough) || false,
+      passthrough: options.passthrough || false
     };
 
     pinoGelf(opts);
