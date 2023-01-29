@@ -27,7 +27,7 @@ program
     const opts = {
       customKeys: options.specifyCustomFields || [],
       host: options.host || '127.0.0.1',
-      protocol: options.protocol.toLowerCase() || 'udp',
+      protocol: (options.protocol && options.protocol.toLowerCase()) || 'udp',
       maxChunkSize: options.maxChunkSize || 1420,
       keepAlive: options.keepAlive != null ? options.keepAlive.toLowerCase() !== 'false' : true,
       reconnectionLimit: options.reconnectionLimit || -1,
