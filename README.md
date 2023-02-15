@@ -40,6 +40,24 @@ node your-app.js | pino-gelf log -h graylog.server.com
 // Set Graylog port
 node your-app.js | pino-gelf log -p 12202
 
+// Use HTTP protocol
+node your-app.js | pino-gelf log -P http
+
+// Use HTTPS protocol
+node your-app.js | pino-gelf log -P https
+
+// Use keep alive for HTTP/TCP
+node your-app.js | pino-gelf log -P http -k true
+
+// Use TCP protocol
+node your-app.js | pino-gelf log -P tcp
+
+// Use TLS protocol
+node your-app.js | pino-gelf log -P tls
+
+// Retry TCP connection for 10 times every 3 seconds
+node your-app.js | pino-gelf log -P tcp -r 10 -d 3000
+
 // Set Graylog maximum chunk size
 node your-app.js | pino-gelf log -m 8192
 
@@ -56,7 +74,11 @@ Property|Default
 ---|---
 Host|`127.0.0.1`
 Port|`12201`
+Protocol|`udp`
 Maximum Chunk Size|`1420`
+Keep Alive|`true`
+Reconnection limit|`-1 (no limit)`
+Reconnection delay|`1000`
 Verbose Logging|`false`
 Passthrough|`false`
 
@@ -156,3 +178,5 @@ __Note:__ Pino log messages without a level map to SysLog Critical
 ## Acknowledgements
 
 The implementation of Pino GELF is based in large part on [pino-syslog](https://github.com/jsumners/pino-syslog/) and [gelf-node](https://github.com/robertkowalski/gelf-node).
+
+
