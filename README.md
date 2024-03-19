@@ -1,6 +1,6 @@
 # Pino GELF
 [![npm version](https://img.shields.io/npm/v/pino-gelf)](https://www.npmjs.com/package/pino-gelf)
-[![Build Status](https://img.shields.io/github/workflow/status/pinojs/pino-gelf/CI)](https://github.com/pinojs/pino-gelf/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/pinojs/pino-gelf/ci.yml?branch=master)](https://github.com/pinojs/pino-gelf/actions)
 
 Pino GELF (pino-gelf) is a transport for the [Pino](https://www.npmjs.com/package/pino) logger. Pino GELF receives Pino logs from stdin and transforms them into [GELF](http://docs.graylog.org/en/2.1/pages/gelf.html) format before sending them to a remote [Graylog](https://www.graylog.org) server via UDP.
 
@@ -178,5 +178,3 @@ __Note:__ Pino log messages without a level map to SysLog Critical
 ## Acknowledgements
 
 The implementation of Pino GELF is based in large part on [pino-syslog](https://github.com/jsumners/pino-syslog/) and [gelf-node](https://github.com/robertkowalski/gelf-node).
-
-
