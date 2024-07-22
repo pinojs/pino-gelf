@@ -38,7 +38,7 @@ jobs:
       contents: read
     strategy:
       matrix:
-        node-version: [14, 16, 18, 20, "latest"] # add 22 when latest version becomes node-23
+        node-version: [14, 16, 18, 20, 22]
         os: [macos-latest, ubuntu-latest]
         exclude:
           - os: macos-latest
