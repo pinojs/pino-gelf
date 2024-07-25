@@ -12,15 +12,15 @@ program
 program
   .command('log')
   .description('Run Pino-GELF')
-  .option('-h, --host [host]', 'Graylog Host')
-  .option('-p, --port [port]', 'Graylog Port', parseInt)
-  .option('-P, --protocol [protocol]', 'Graylog protocol (UDP, HTTP, HTTPS, TCP, TLS)')
-  .option('-m, --max-chunk-size [maxChunkSize]', 'Graylog UDP Input Maximum Chunk Size', parseInt)
-  .option('-k, --keep-alive [keepAlive]', 'HTTP/TCP keep alive')
-  .option('-r, --reconnection-limit [reconnectionLimit]', 'TCP reconnection limit', parseInt)
-  .option('-d, --reconnection-delay [reconnectionDelay]', 'TCP reconnection delay', parseInt)
-  .option('-v, --verbose', 'Output GELF to console')
-  .option('-t, --passthrough', 'Output original input to stdout to allow command chaining')
+  .addOption(new program.Option('-h, --host [host]', 'Graylog Host').env('PINO_GELF_HOST'))
+  .addOption(new program.Option('-p, --port [port]', 'Graylog Port').env('PINO_GELF_PORT').argParser(parseInt))
+  .addOption(new program.Option('-P, --protocol [protocol]', 'Graylog protocol (UDP, HTTP, HTTPS, TCP, TLS)').env('PINO_GELF_PROTOCOL'))
+  .addOption(new program.Option('-m, --max-chunk-size [maxChunkSize]', 'Graylog UDP Input Maximum Chunk Size').env('PINO_GELF_MAX_CHUNK_SIZE').argParser(parseInt))
+  .addOption(new program.Option('-k, --keep-alive [keepAlive]', 'HTTP/TCP keep alive').env('PINO_GELF_KEEP_ALIVE'))
+  .addOption(new program.Option('-r, --reconnection-limit [reconnectionLimit]', 'TCP reconnection limit').env('PINO_GELF_RECONNECTION_LIMIT').argParser(parseInt))
+  .addOption(new program.Option('-d, --reconnection-delay [reconnectionDelay]', 'TCP reconnection delay').env('PINO_GELF_RECONNECTION_DELAY').argParser(parseInt))
+  .addOption(new program.Option('-v, --verbose', 'Output GELF to console'))
+  .addOption(new program.Option('-t, --passthrough', 'Output original input to stdout to allow command chaining'))
   .action(function () {
     const options = this.opts();
 

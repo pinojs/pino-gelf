@@ -70,17 +70,17 @@ node your-app.js | pino-gelf log -t
 
 __Note__: The defaults for these options are:
 
-Property|Default
----|---
-Host|`127.0.0.1`
-Port|`12201`
-Protocol|`udp`
-Maximum Chunk Size|`1420`
-Keep Alive|`true`
-Reconnection limit|`-1 (no limit)`
-Reconnection delay|`1000`
-Verbose Logging|`false`
-Passthrough|`false`
+Property|Environment Variable|Default
+---|---|---
+Host|`PINO_GELF_HOST`|`127.0.0.1`
+Port|`PINO_GELF_PORT`|`12201`
+Protocol|`PINO_GELF_PROTOCOL`|`udp`
+Maximum Chunk Size|`PINO_GELF_MAX_CHUNK_SIZE`|`1420`
+Keep Alive|`PINO_GELF_KEEP_ALIVE`|`true`
+Reconnection limit|`PINO_GELF_RECONNECTION_LIMIT`|`-1 (no limit)`
+Reconnection delay|`PINO_GELF_RECONNECTION_DELAY`|`1000`
+Verbose Logging|-|`false`
+Passthrough|-|`false`
 
 
 ## Example
