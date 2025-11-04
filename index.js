@@ -1,13 +1,13 @@
 #! /usr/bin/env node
 
-'use strict';
+'use strict'
 
-const program = require('commander');
-const version = require('./package.json').version;
-const pinoGelf = require('./lib/pino-gelf');
+const program = require('commander')
+const version = require('./package.json').version
+const pinoGelf = require('./lib/pino-gelf')
 
 program
-  .version(version);
+  .version(version)
 
 program
   .command('log')
@@ -22,7 +22,7 @@ program
   .addOption(new program.Option('-v, --verbose', 'Output GELF to console'))
   .addOption(new program.Option('-t, --passthrough', 'Output original input to stdout to allow command chaining'))
   .action(function () {
-    const options = this.opts();
+    const options = this.opts()
 
     const opts = {
       customKeys: options.specifyCustomFields || [],
@@ -35,21 +35,21 @@ program
       port: options.port || 12201,
       verbose: (options.verbose && !options.passthrough) || false,
       passthrough: options.passthrough || false
-    };
+    }
 
-    switch(opts.protocol) {
-    case 'udp':
-    case 'http':
-    case 'https':
-    case 'tcp':
-    case 'tls':
-      break;
-    default:
-      throw new Error('Unsupported protocol ' + opts.protocol);
-    } 
+    switch (opts.protocol) {
+      case 'udp':
+      case 'http':
+      case 'https':
+      case 'tcp':
+      case 'tls':
+        break
+      default:
+        throw new Error('Unsupported protocol ' + opts.protocol)
+    }
 
-    pinoGelf(opts);
-  });
+    pinoGelf(opts)
+  })
 
 program
-  .parse(process.argv);
+  .parse(process.argv)
