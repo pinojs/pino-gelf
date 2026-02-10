@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/pinojs/pino-gelf#readme",
   "dependencies": {
-    "commander": "^11.0.0",
+    "commander": "^14.0.3",
     "fast-json-parse": "^1.0.3",
     "fast-json-stringify": "^6.1.1",
     "lodash": "^4.17.21",
