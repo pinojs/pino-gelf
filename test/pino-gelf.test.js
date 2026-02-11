@@ -201,6 +201,20 @@ test('pino output with custom fields is transformed to gelf output', (t, done) =
   pg.stdin.write(pinoCustomOutput + '\n')
 })
 
+test('custom messageKey is used when --message-key is specified', (t, done) => {
+  const pg = cp.spawn('node', [pgPath, 'log', '-v', '--message-key', 'message'])
+  const input = '{"level":30,"time":1531171074631,"message":"hello world","pid":657,"hostname":"box","name":"app","v":1}'
+  const expected = '{"_name":"app","version":"1.1","host":"box","short_message":"hello world","full_message":"hello world","timestamp":1531171074,"level":6}\n'
+
+  pg.stdout.on('data', data => {
+    pg.kill()
+    deepEqual(data.toString(), expected)
+    done()
+  })
+
+  pg.stdin.write(input + '\n')
+})
+
 test('pino output is passed through to stdout when using --passthrough arg', (t, done) => {
   const pg = cp.spawn('node', [pgPath, 'log', '-t'])
   const pinoCustomOutput = '{"level":30,"time":1531171074631,"msg":"hello world","environment":"dev","colour":"red","pid":657,"hostname":"box","name":"app","v":1}'
