@@ -21,6 +21,7 @@ program
   .addOption(new program.Option('-d, --reconnection-delay [reconnectionDelay]', 'TCP reconnection delay').env('PINO_GELF_RECONNECTION_DELAY').argParser(parseInt))
   .addOption(new program.Option('-v, --verbose', 'Output GELF to console'))
   .addOption(new program.Option('-t, --passthrough', 'Output original input to stdout to allow command chaining'))
+  .addOption(new program.Option('--message-key [messageKey]', 'Message key for Pino log messages').env('PINO_GELF_MESSAGE_KEY'))
   .action(function () {
     const options = this.opts()
 
@@ -34,7 +35,8 @@ program
       reconnectionDelay: options.reconnectionDelay || 1000,
       port: options.port || 12201,
       verbose: (options.verbose && !options.passthrough) || false,
-      passthrough: options.passthrough || false
+      passthrough: options.passthrough || false,
+      messageKey: options.messageKey || 'msg'
     }
 
     switch (opts.protocol) {
