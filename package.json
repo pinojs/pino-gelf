@@ -31,7 +31,7 @@
     "pump": "^3.0.0",
     "readable-stream": "^4.3.0",
     "split2": "^4.1.0",
-    "through2": "^4.0.2"
+    "through2": "^5.0.0"
   },
   "devDependencies": {
     "c8": "^11.0.0",
